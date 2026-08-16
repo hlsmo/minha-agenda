@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-  <title>Minha Agenda Profissional</title>
-  <meta name="description" content="Gestão completa de agendamentos, clientes e financeiro para profissionais autônomos.">
+  <title>Agenda Clínica | Painel de Enfermagem Estética</title>
+  <meta name="description" content="Gestão clínica de agendamentos, prontuários de pacientes e procedimentos em enfermagem estética.">
   <link rel="manifest" href="manifest.json">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -25,15 +25,15 @@
         </div>
         <div>
           <h1 class="brand-title" id="header-business-name">Minha Agenda</h1>
-          <span style="font-size: 0.72rem; color: var(--text-muted);" id="header-owner-name">Painel Profissional</span>
+          <span style="font-size: 0.72rem; color: var(--text-muted);" id="header-owner-name">Consultório & Gestão Clínica</span>
         </div>
       </div>
       <div class="header-actions">
-        <a href="cliente.html" target="_blank" class="btn btn-sm btn-secondary" title="Ver página do cliente" style="text-decoration:none; display:inline-flex; align-items:center; gap:4px;">
+        <a href="cliente.html" target="_blank" class="btn btn-sm btn-secondary" title="Agendamento Online do Paciente" style="text-decoration:none; display:inline-flex; align-items:center; gap:4px;">
           <svg width="15" height="15" fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
           </svg>
-          Link Cliente
+          Link Paciente
         </a>
       </div>
     </header>
@@ -59,7 +59,7 @@
         <div class="summary-chips">
           <div class="summary-chip">
             <div class="summary-chip-val" id="stat-day-total">0</div>
-            <div class="summary-chip-lbl">Agendados</div>
+            <div class="summary-chip-lbl">Atendimentos</div>
           </div>
           <div class="summary-chip">
             <div class="summary-chip-val" id="stat-day-confirmed">0</div>
@@ -67,18 +67,19 @@
           </div>
           <div class="summary-chip">
             <div class="summary-chip-val" id="stat-day-rev">R$ 0</div>
-            <div class="summary-chip-lbl">Previsão</div>
+            <div class="summary-chip-lbl">Previsão do Dia</div>
           </div>
         </div>
 
         <!-- Section Title & Quick Add -->
         <div class="section-header">
           <div>
-            <h2 class="section-title">Horários Marcados</h2>
+            <h2 class="section-title">Agenda de Procedimentos</h2>
+            <div class="section-subtitle">Atendimentos do dia selecionado</div>
           </div>
           <button class="btn btn-sm btn-primary" id="btn-open-new-app">
             <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M12 4v16m8-8H4"/></svg>
-            Novo Horário
+            Novo Agendamento
           </button>
         </div>
 
@@ -93,17 +94,17 @@
       <section id="tab-clientes" class="tab-section">
         <div class="section-header">
           <div>
-            <h2 class="section-title">Clientes</h2>
-            <div class="section-subtitle">Histórico e dados de contato</div>
+            <h2 class="section-title">Pacientes</h2>
+            <div class="section-subtitle">Prontuário, contatos e histórico clínico</div>
           </div>
           <button class="btn btn-sm btn-primary" id="btn-open-new-client">
             <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M12 4v16m8-8H4"/></svg>
-            Adicionar
+            Cadastrar Paciente
           </button>
         </div>
 
         <div class="form-group">
-          <input type="text" id="input-search-clients" class="form-input" placeholder="🔍 Buscar cliente por nome ou WhatsApp...">
+          <input type="text" id="input-search-clients" class="form-input" placeholder="🔍 Buscar paciente por nome ou WhatsApp...">
         </div>
 
         <div id="clients-list-container">
@@ -115,12 +116,12 @@
       <section id="tab-servicos" class="tab-section">
         <div class="section-header">
           <div>
-            <h2 class="section-title">Catálogo de Serviços</h2>
-            <div class="section-subtitle">Defina preços e durações</div>
+            <h2 class="section-title">Procedimentos Estéticos</h2>
+            <div class="section-subtitle">Tabela de procedimentos, valores e tempos</div>
           </div>
           <button class="btn btn-sm btn-primary" id="btn-open-new-service">
             <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M12 4v16m8-8H4"/></svg>
-            Novo Serviço
+            Novo Procedimento
           </button>
         </div>
 
@@ -129,7 +130,7 @@
         </div>
 
         <div class="card">
-          <h3 style="font-size: 1.05rem; font-weight: 700; margin-bottom: 0.75rem;">⏰ Regras de Horário de Atendimento</h3>
+          <h3 style="font-size: 1.05rem; font-weight: 700; margin-bottom: 0.75rem;">⏰ Horários de Atendimento Clínico</h3>
           <form id="form-work-hours">
             <div class="form-row">
               <div class="form-group">
@@ -151,6 +152,15 @@
                 <input type="time" id="cfg-lunch-end" class="form-input">
               </div>
             </div>
+            <div class="form-group">
+              <label class="form-label">Intervalo entre Slots de Agendamento</label>
+              <select id="cfg-slot-interval" class="form-select">
+                <option value="15">15 minutos</option>
+                <option value="30">30 minutos</option>
+                <option value="45">45 minutos</option>
+                <option value="60">1 hora</option>
+              </select>
+            </div>
             <button type="submit" class="btn btn-secondary btn-block btn-sm">Salvar Expediente</button>
           </form>
         </div>
@@ -160,8 +170,8 @@
       <section id="tab-financeiro" class="tab-section">
         <div class="section-header">
           <div>
-            <h2 class="section-title">Financeiro & Desempenho</h2>
-            <div class="section-subtitle">Controle de faturamento e atendimentos</div>
+            <h2 class="section-title">Faturamento & Desempenho Clínico</h2>
+            <div class="section-subtitle">Fluxo financeiro e volume de procedimentos</div>
           </div>
         </div>
 
@@ -175,17 +185,17 @@
             <div class="value" id="fin-month-rev" style="color: var(--success);">R$ 0,00</div>
           </div>
           <div class="metric-card">
-            <div class="title">Atendimentos no Mês</div>
+            <div class="title">Procedimentos no Mês</div>
             <div class="value" id="fin-month-count">0</div>
           </div>
           <div class="metric-card">
-            <div class="title">Ticket Médio</div>
+            <div class="title">Ticket Médio / Paciente</div>
             <div class="value" id="fin-ticket-avg">R$ 0,00</div>
           </div>
         </div>
 
         <div class="card">
-          <h3 style="font-size: 1rem; font-weight: 700; margin-bottom: 0.75rem;">Serviços Mais Realizados</h3>
+          <h3 style="font-size: 1rem; font-weight: 700; margin-bottom: 0.75rem;">Procedimentos Mais Realizados</h3>
           <div id="fin-top-services">
             <!-- Rendered via JS -->
           </div>
@@ -205,7 +215,7 @@
           <h3 style="font-size: 1rem; font-weight: 700; margin-bottom: 0.75rem;">Perfil Profissional</h3>
           <form id="form-business-settings">
             <div class="form-group">
-              <label class="form-label">Nome do Estabelecimento / Profissional</label>
+              <label class="form-label">Nome da Clínica / Enf.ª Estética (COREN)</label>
               <input type="text" id="cfg-business-name" class="form-input" required>
             </div>
             <div class="form-group">
@@ -213,8 +223,8 @@
               <input type="tel" id="cfg-phone" class="form-input" placeholder="Ex: 11999998888" required>
             </div>
             <div class="form-group">
-              <label class="form-label">Segmento / Especialidade</label>
-              <input type="text" id="cfg-category" class="form-input">
+              <label class="form-label">Especialidade Clínica</label>
+              <input type="text" id="cfg-category" class="form-input" placeholder="Ex: Enfermagem Estética Avançada, Harmonização Facial...">
             </div>
             <button type="submit" class="btn btn-primary btn-block">Salvar Perfil</button>
           </form>
@@ -243,11 +253,11 @@
       </button>
       <button class="nav-item" data-tab="tab-clientes">
         <svg fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z"/></svg>
-        <span>Clientes</span>
+        <span>Pacientes</span>
       </button>
       <button class="nav-item" data-tab="tab-servicos">
         <svg fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M14.121 14.121L19 19m-7-7l7-7m-7 7l-2.879 2.879a3 3 0 11-4.242-4.242L7.757 7.757m0 0l2.879-2.879a3 3 0 114.242 4.242L12 12z"/></svg>
-        <span>Serviços</span>
+        <span>Procedimentos</span>
       </button>
       <button class="nav-item" data-tab="tab-financeiro">
         <svg fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
@@ -265,22 +275,22 @@
   <div class="modal-overlay" id="modal-appointment">
     <div class="modal-sheet">
       <div class="modal-header">
-        <h3 class="modal-title" id="modal-app-title">Novo Agendamento</h3>
+        <h3 class="modal-title" id="modal-app-title">Novo Atendimento Clínico</h3>
         <button class="icon-btn close-modal" data-modal="modal-appointment">✕</button>
       </div>
       <form id="form-appointment">
         <input type="hidden" id="app-id">
         <div class="form-group">
-          <label class="form-label">Cliente</label>
+          <label class="form-label">Paciente</label>
           <div style="display:flex; gap:0.5rem;">
             <select id="app-client-select" class="form-select" style="flex:1;" required>
               <!-- Populated via JS -->
             </select>
-            <button type="button" class="btn btn-secondary btn-sm" id="btn-quick-new-client">+ Novo</button>
+            <button type="button" class="btn btn-secondary btn-sm" id="btn-quick-new-client">+ Novo(a) Paciente</button>
           </div>
         </div>
         <div class="form-group">
-          <label class="form-label">Serviço</label>
+          <label class="form-label">Procedimento</label>
           <select id="app-service-select" class="form-select" required>
             <!-- Populated via JS -->
           </select>
@@ -305,8 +315,8 @@
           </select>
         </div>
         <div class="form-group">
-          <label class="form-label">Observações (opcional)</label>
-          <input type="text" id="app-notes" class="form-input" placeholder="Ex: Trazer referência de corte">
+          <label class="form-label">Observações Clínicas</label>
+          <input type="text" id="app-notes" class="form-input" placeholder="Ex: Região glabelar, anestésico tópico 20 min antes...">
         </div>
         <button type="submit" class="btn btn-primary btn-block" style="margin-top: 0.5rem;">Salvar Agendamento</button>
       </form>
@@ -317,22 +327,22 @@
   <div class="modal-overlay" id="modal-client">
     <div class="modal-sheet">
       <div class="modal-header">
-        <h3 class="modal-title" id="modal-client-title">Novo Cliente</h3>
+        <h3 class="modal-title" id="modal-client-title">Novo(a) Paciente</h3>
         <button class="icon-btn close-modal" data-modal="modal-client">✕</button>
       </div>
       <form id="form-client">
         <input type="hidden" id="cli-id">
         <div class="form-group">
           <label class="form-label">Nome Completo</label>
-          <input type="text" id="cli-name" class="form-input" placeholder="Nome do cliente" required>
+          <input type="text" id="cli-name" class="form-input" placeholder="Nome do(a) paciente" required>
         </div>
         <div class="form-group">
           <label class="form-label">WhatsApp / Telefone</label>
           <input type="tel" id="cli-phone" class="form-input" placeholder="Ex: 11988887777" required>
         </div>
         <div class="form-group">
-          <label class="form-label">Observações / Ficha</label>
-          <textarea id="cli-notes" class="form-textarea" rows="2" placeholder="Preferências, alergias, restrições..."></textarea>
+          <label class="form-label">Ficha Clínica / Queixa / Alergias</label>
+          <textarea id="cli-notes" class="form-textarea" rows="2" placeholder="Ex: Alergias (lidocaína, látex), histórico estético, fototipo..."></textarea>
         </div>
         <button type="submit" class="btn btn-primary btn-block">Salvar Cliente</button>
       </form>
@@ -343,14 +353,14 @@
   <div class="modal-overlay" id="modal-service">
     <div class="modal-sheet">
       <div class="modal-header">
-        <h3 class="modal-title" id="modal-service-title">Novo Serviço</h3>
+        <h3 class="modal-title" id="modal-service-title">Novo Procedimento Estético</h3>
         <button class="icon-btn close-modal" data-modal="modal-service">✕</button>
       </div>
       <form id="form-service">
         <input type="hidden" id="srv-id">
         <div class="form-group">
-          <label class="form-label">Nome do Serviço</label>
-          <input type="text" id="srv-name" class="form-input" placeholder="Ex: Escova Modelada" required>
+          <label class="form-label">Nome do Procedimento</label>
+          <input type="text" id="srv-name" class="form-input" placeholder="Ex: Toxina Botulínica 3 Áreas" required>
         </div>
         <div class="form-row">
           <div class="form-group">
@@ -378,461 +388,6 @@
   <div class="toast-msg" id="toast-msg">Operação realizada com sucesso!</div>
 
   <script src="app.js"></script>
-  <script>
-    // ================= INTERFACE CONTROLLER =================
-    let selectedDate = getTodayDateString();
-
-    function showToast(msg) {
-      const toast = document.getElementById('toast-msg');
-      toast.textContent = msg;
-      toast.style.display = 'block';
-      setTimeout(() => { toast.style.display = 'none'; }, 2400);
-    }
-
-    // Modal Control
-    function openModal(id) {
-      document.getElementById(id).classList.add('open');
-    }
-    function closeModal(id) {
-      document.getElementById(id).classList.remove('open');
-    }
-
-    document.querySelectorAll('.close-modal').forEach(btn => {
-      btn.addEventListener('click', () => {
-        closeModal(btn.getAttribute('data-modal'));
-      });
-    });
-
-    // Navigation Tabs
-    const navItems = document.querySelectorAll('.nav-item');
-    const tabSections = document.querySelectorAll('.tab-section');
-
-    navItems.forEach(item => {
-      item.addEventListener('click', () => {
-        const targetTab = item.getAttribute('data-tab');
-        navItems.forEach(n => n.classList.remove('active'));
-        tabSections.forEach(t => t.classList.remove('active'));
-        item.classList.add('active');
-        document.getElementById(targetTab).classList.add('active');
-
-        if (targetTab === 'tab-agenda') renderAgenda();
-        if (targetTab === 'tab-clientes') renderClients();
-        if (targetTab === 'tab-servicos') renderServices();
-        if (targetTab === 'tab-financeiro') renderFinancials();
-        if (targetTab === 'tab-ajustes') loadSettings();
-      });
-    });
-
-    // Date Navigation
-    function changeDay(delta) {
-      const d = new Date(selectedDate + 'T00:00:00');
-      d.setDate(d.getDate() + delta);
-      selectedDate = d.toISOString().split('T')[0];
-      updateDateLabel();
-      renderAgenda();
-    }
-
-    function updateDateLabel() {
-      const today = getTodayDateString();
-      const parts = selectedDate.split('-');
-      const d = new Date(selectedDate + 'T00:00:00');
-      const dayNames = ['Domingo', 'Segunda', 'Terça', 'Quarta', 'Quinta', 'Sexta', 'Sábado'];
-      const monthNames = ['Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun', 'Jul', 'Ago', 'Set', 'Out', 'Nov', 'Dez'];
-      
-      const dayName = dayNames[d.getDay()];
-      const dayNum = parts[2];
-      const monthName = monthNames[parseInt(parts[1]) - 1];
-
-      let label = `${dayName}, ${dayNum} de ${monthName}`;
-      if (selectedDate === today) label = `Hoje • ${label}`;
-      document.getElementById('lbl-current-date').textContent = label;
-    }
-
-    document.getElementById('btn-prev-day').addEventListener('click', () => changeDay(-1));
-    document.getElementById('btn-next-day').addEventListener('click', () => changeDay(1));
-
-    // ================= RENDER AGENDA =================
-    function renderAgenda() {
-      const appointments = AppStore.getAppointments().filter(a => a.date === selectedDate);
-      // Ordena por horário
-      appointments.sort((a, b) => a.time.localeCompare(b.time));
-
-      // Stats
-      const confirmedCount = appointments.filter(a => a.status === 'confirmado' || a.status === 'concluido').length;
-      const totalRev = appointments
-        .filter(a => a.status !== 'cancelado')
-        .reduce((sum, a) => sum + Number(a.price || 0), 0);
-
-      document.getElementById('stat-day-total').textContent = appointments.length;
-      document.getElementById('stat-day-confirmed').textContent = confirmedCount;
-      document.getElementById('stat-day-rev').textContent = TimeUtils.formatCurrency(totalRev);
-
-      const container = document.getElementById('appointments-container');
-      if (appointments.length === 0) {
-        container.innerHTML = `
-          <div class="empty-state">
-            <svg fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>
-            <p>Nenhum horário marcado para este dia.</p>
-          </div>
-        `;
-        return;
-      }
-
-      container.innerHTML = appointments.map(app => {
-        const confirmUrl = WhatsAppService.createWhatsAppLink(app.clientPhone, WhatsAppService.getConfirmationMsg(app));
-        const reminderUrl = WhatsAppService.createWhatsAppLink(app.clientPhone, WhatsAppService.getReminderMsg(app));
-
-        return `
-          <div class="appointment-item status-${app.status}">
-            <div style="display:flex; justify-content:space-between; align-items:flex-start;">
-              <div class="app-time-badge">
-                <svg width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
-                ${app.time} (${app.duration} min)
-              </div>
-              <span class="status-pill ${app.status}">${app.status}</span>
-            </div>
-            
-            <div class="app-client-name">${app.clientName}</div>
-            <div class="app-service-info">
-              <span>✂️ ${app.serviceName}</span> • <strong>${TimeUtils.formatCurrency(app.price)}</strong>
-              ${app.notes ? `<div style="font-size:0.78rem; color:var(--text-light); margin-top:2px;">Obs: ${app.notes}</div>` : ''}
-            </div>
-
-            <div class="app-footer">
-              <div class="app-actions">
-                <a href="${confirmUrl}" target="_blank" class="btn btn-sm btn-secondary" title="Enviar Confirmação WhatsApp" style="color:#25d366; text-decoration:none; font-size:0.75rem; padding:0.25rem 0.5rem;">
-                  📱 Confirmar
-                </a>
-                <a href="${reminderUrl}" target="_blank" class="btn btn-sm btn-secondary" title="Enviar Lembrete WhatsApp" style="text-decoration:none; font-size:0.75rem; padding:0.25rem 0.5rem;">
-                  🔔 Lembrete
-                </a>
-              </div>
-              <div style="display:flex; gap:4px;">
-                <button class="icon-btn" style="width:28px; height:28px;" onclick="cycleStatus('${app.id}')" title="Alterar status">
-                  ✓
-                </button>
-                <button class="icon-btn" style="width:28px; height:28px;" onclick="deleteAppointment('${app.id}')" title="Excluir">
-                  🗑
-                </button>
-              </div>
-            </div>
-          </div>
-        `;
-      }).join('');
-    }
-
-    window.cycleStatus = function(appId) {
-      const apps = AppStore.getAppointments();
-      const idx = apps.findIndex(a => a.id === appId);
-      if (idx !== -1) {
-        const statuses = ['agendado', 'confirmado', 'concluido', 'cancelado'];
-        const next = statuses[(statuses.indexOf(apps[idx].status) + 1) % statuses.length];
-        apps[idx].status = next;
-        AppStore.saveAppointments(apps);
-        renderAgenda();
-        showToast(`Status atualizado para: ${next}`);
-      }
-    };
-
-    window.deleteAppointment = function(appId) {
-      if (confirm('Deseja excluir este agendamento?')) {
-        const apps = AppStore.getAppointments().filter(a => a.id !== appId);
-        AppStore.saveAppointments(apps);
-        renderAgenda();
-        showToast('Agendamento excluído');
-      }
-    };
-
-    // ================= RENDER CLIENTES =================
-    function renderClients(query = '') {
-      const clients = AppStore.getClients();
-      const apps = AppStore.getAppointments();
-      const container = document.getElementById('clients-list-container');
-
-      const filtered = clients.filter(c => 
-        c.name.toLowerCase().includes(query.toLowerCase()) || 
-        c.phone.includes(query)
-      );
-
-      if (filtered.length === 0) {
-        container.innerHTML = `<div class="empty-state"><p>Nenhum cliente encontrado.</p></div>`;
-        return;
-      }
-
-      container.innerHTML = filtered.map(c => {
-        const clientApps = apps.filter(a => a.clientId === c.id || a.clientName === c.name);
-        const totalSpent = clientApps.filter(a => a.status === 'concluido').reduce((sum, a) => sum + Number(a.price || 0), 0);
-
-        return `
-          <div class="card" style="margin-bottom:0.75rem;">
-            <div style="display:flex; justify-content:space-between; align-items:flex-start;">
-              <div>
-                <strong style="font-size:1rem;">${c.name}</strong>
-                <div style="font-size:0.85rem; color:var(--text-muted);">📱 ${c.phone}</div>
-                ${c.notes ? `<div style="font-size:0.8rem; color:var(--text-light); margin-top:3px;">📝 ${c.notes}</div>` : ''}
-              </div>
-              <div style="text-align:right;">
-                <div style="font-size:0.75rem; color:var(--text-muted);">Total Gasto</div>
-                <strong style="color:var(--success); font-size:0.9rem;">${TimeUtils.formatCurrency(totalSpent)}</strong>
-              </div>
-            </div>
-            <div style="margin-top:0.75rem; padding-top:0.5rem; border-top:1px solid var(--border-color); display:flex; justify-content:space-between; align-items:center;">
-              <span style="font-size:0.75rem; color:var(--text-muted);">${clientApps.length} agendamento(s)</span>
-              <a href="https://api.whatsapp.com/send?phone=55${c.phone.replace(/\D/g,'')}" target="_blank" class="btn btn-sm btn-secondary" style="font-size:0.75rem; padding:0.25rem 0.6rem;">
-                Chamar WhatsApp
-              </a>
-            </div>
-          </div>
-        `;
-      }).join('');
-    }
-
-    document.getElementById('input-search-clients').addEventListener('input', (e) => {
-      renderClients(e.target.value);
-    });
-
-    // ================= RENDER SERVIÇOS =================
-    function renderServices() {
-      const services = AppStore.getServices();
-      const container = document.getElementById('services-list-container');
-      
-      container.innerHTML = services.map(s => `
-        <div class="card" style="margin-bottom:0.6rem; padding:0.85rem; display:flex; justify-content:space-between; align-items:center;">
-          <div>
-            <strong style="font-size:0.95rem;">${s.name}</strong>
-            <div style="font-size:0.8rem; color:var(--text-muted);">⏱ ${s.duration} min • <span style="color:var(--primary); font-weight:700;">${TimeUtils.formatCurrency(s.price)}</span></div>
-          </div>
-          <button class="icon-btn" style="width:30px; height:30px;" onclick="deleteService('${s.id}')" title="Excluir Serviço">🗑</button>
-        </div>
-      `).join('');
-    }
-
-    window.deleteService = function(srvId) {
-      if (confirm('Deseja excluir este serviço?')) {
-        const srvs = AppStore.getServices().filter(s => s.id !== srvId);
-        AppStore.saveServices(srvs);
-        renderServices();
-        showToast('Serviço excluído');
-      }
-    };
-
-    // ================= RENDER FINANCEIRO =================
-    function renderFinancials() {
-      const apps = AppStore.getAppointments();
-      const today = getTodayDateString();
-      const currentMonth = today.slice(0, 7);
-
-      const todayApps = apps.filter(a => a.date === today && a.status !== 'cancelado');
-      const todayRev = todayApps.reduce((sum, a) => sum + Number(a.price || 0), 0);
-
-      const monthApps = apps.filter(a => a.date.startsWith(currentMonth) && a.status !== 'cancelado');
-      const monthRev = monthApps.reduce((sum, a) => sum + Number(a.price || 0), 0);
-      const ticketAvg = monthApps.length > 0 ? (monthRev / monthApps.length) : 0;
-
-      document.getElementById('fin-today-rev').textContent = TimeUtils.formatCurrency(todayRev);
-      document.getElementById('fin-month-rev').textContent = TimeUtils.formatCurrency(monthRev);
-      document.getElementById('fin-month-count').textContent = monthApps.length;
-      document.getElementById('fin-ticket-avg').textContent = TimeUtils.formatCurrency(ticketAvg);
-
-      // Top Serviços
-      const serviceCounts = {};
-      monthApps.forEach(a => {
-        serviceCounts[a.serviceName] = (serviceCounts[a.serviceName] || 0) + 1;
-      });
-
-      const topContainer = document.getElementById('fin-top-services');
-      const entries = Object.entries(serviceCounts).sort((a, b) => b[1] - a[1]);
-
-      if (entries.length === 0) {
-        topContainer.innerHTML = '<div style="font-size:0.85rem; color:var(--text-muted);">Nenhum atendimento registrado neste mês.</div>';
-      } else {
-        topContainer.innerHTML = entries.map(([name, count]) => `
-          <div style="display:flex; justify-content:space-between; font-size:0.85rem; padding:0.35rem 0; border-bottom:1px solid var(--border-color);">
-            <span>${name}</span>
-            <strong>${count}x</strong>
-          </div>
-        `).join('');
-      }
-    }
-
-    // ================= CONFIGURAÇÕES & SYNC =================
-    function loadSettings() {
-      const s = AppStore.getSettings();
-      document.getElementById('header-business-name').textContent = s.businessName;
-      document.getElementById('header-owner-name').textContent = s.ownerName || s.category;
-      
-      document.getElementById('cfg-business-name').value = s.businessName || '';
-      document.getElementById('cfg-phone').value = s.phone || '';
-      document.getElementById('cfg-category').value = s.category || '';
-      
-      document.getElementById('cfg-work-start').value = s.workStart || '08:00';
-      document.getElementById('cfg-work-end').value = s.workEnd || '19:00';
-      document.getElementById('cfg-lunch-start').value = s.lunchStart || '12:00';
-      document.getElementById('cfg-lunch-end').value = s.lunchEnd || '13:00';
-    }
-
-    document.getElementById('form-business-settings').addEventListener('submit', (e) => {
-      e.preventDefault();
-      const s = AppStore.getSettings();
-      s.businessName = document.getElementById('cfg-business-name').value;
-      s.phone = document.getElementById('cfg-phone').value;
-      s.category = document.getElementById('cfg-category').value;
-      AppStore.saveSettings(s);
-      loadSettings();
-      showToast('Perfil atualizado com sucesso!');
-    });
-
-    document.getElementById('form-work-hours').addEventListener('submit', (e) => {
-      e.preventDefault();
-      const s = AppStore.getSettings();
-      s.workStart = document.getElementById('cfg-work-start').value;
-      s.workEnd = document.getElementById('cfg-work-end').value;
-      s.lunchStart = document.getElementById('cfg-lunch-start').value;
-      s.lunchEnd = document.getElementById('cfg-lunch-end').value;
-      AppStore.saveSettings(s);
-      showToast('Horários de expediente salvos!');
-    });
-
-    // Backup Export / Import
-    document.getElementById('btn-export-backup').addEventListener('click', () => {
-      const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(AppStore.exportFullBackup());
-      const downloadAnchor = document.createElement('a');
-      downloadAnchor.setAttribute("href", dataStr);
-      downloadAnchor.setAttribute("download", `minha_agenda_backup_${getTodayDateString()}.json`);
-      document.body.appendChild(downloadAnchor);
-      downloadAnchor.click();
-      downloadAnchor.remove();
-      showToast('Backup exportado com sucesso!');
-    });
-
-    document.getElementById('btn-import-backup-trigger').addEventListener('click', () => {
-      document.getElementById('input-backup-file').click();
-    });
-
-    document.getElementById('input-backup-file').addEventListener('change', (e) => {
-      const file = e.target.files[0];
-      if (!file) return;
-      const reader = new FileReader();
-      reader.onload = (event) => {
-        const success = AppStore.importFullBackup(event.target.result);
-        if (success) {
-          showToast('Dados restaurados com sucesso!');
-          loadSettings();
-          renderAgenda();
-        } else {
-          alert('Arquivo de backup inválido.');
-        }
-      };
-      reader.readAsText(file);
-    });
-
-    // ================= MODAL HANDLERS (NOVO AGENDAMENTO / CLIENTE / SERVIÇO) =================
-    document.getElementById('btn-open-new-app').addEventListener('click', () => {
-      populateAppDropdowns();
-      document.getElementById('app-date').value = selectedDate;
-      document.getElementById('app-time').value = '10:00';
-      openModal('modal-appointment');
-    });
-
-    function populateAppDropdowns() {
-      const clients = AppStore.getClients();
-      const services = AppStore.getServices();
-      
-      const clientSelect = document.getElementById('app-client-select');
-      clientSelect.innerHTML = clients.map(c => `<option value="${c.id}">${c.name} (${c.phone})</option>`).join('');
-
-      const serviceSelect = document.getElementById('app-service-select');
-      serviceSelect.innerHTML = services.map(s => `<option value="${s.id}">${s.name} - ${TimeUtils.formatCurrency(s.price)} (${s.duration} min)</option>`).join('');
-    }
-
-    document.getElementById('form-appointment').addEventListener('submit', (e) => {
-      e.preventDefault();
-      const clients = AppStore.getClients();
-      const services = AppStore.getServices();
-
-      const clientId = document.getElementById('app-client-select').value;
-      const serviceId = document.getElementById('app-service-select').value;
-      const client = clients.find(c => c.id === clientId);
-      const service = services.find(s => s.id === serviceId);
-
-      const newApp = {
-        id: 'app_' + Date.now(),
-        date: document.getElementById('app-date').value,
-        time: document.getElementById('app-time').value,
-        duration: service ? service.duration : 30,
-        clientId: client.id,
-        clientName: client.name,
-        clientPhone: client.phone,
-        serviceId: service.id,
-        serviceName: service.name,
-        price: service.price,
-        status: document.getElementById('app-status').value,
-        notes: document.getElementById('app-notes').value
-      };
-
-      const apps = AppStore.getAppointments();
-      apps.push(newApp);
-      AppStore.saveAppointments(apps);
-
-      closeModal('modal-appointment');
-      renderAgenda();
-      showToast('Agendamento salvo com sucesso!');
-    });
-
-    // Novo Cliente
-    document.getElementById('btn-open-new-client').addEventListener('click', () => {
-      document.getElementById('form-client').reset();
-      openModal('modal-client');
-    });
-    document.getElementById('btn-quick-new-client').addEventListener('click', () => {
-      document.getElementById('form-client').reset();
-      openModal('modal-client');
-    });
-
-    document.getElementById('form-client').addEventListener('submit', (e) => {
-      e.preventDefault();
-      const newCli = {
-        id: 'cli_' + Date.now(),
-        name: document.getElementById('cli-name').value,
-        phone: document.getElementById('cli-phone').value,
-        notes: document.getElementById('cli-notes').value
-      };
-      const clients = AppStore.getClients();
-      clients.push(newCli);
-      AppStore.saveClients(clients);
-      closeModal('modal-client');
-      renderClients();
-      populateAppDropdowns();
-      showToast('Cliente cadastrado!');
-    });
-
-    // Novo Serviço
-    document.getElementById('btn-open-new-service').addEventListener('click', () => {
-      document.getElementById('form-service').reset();
-      openModal('modal-service');
-    });
-
-    document.getElementById('form-service').addEventListener('submit', (e) => {
-      e.preventDefault();
-      const newSrv = {
-        id: 'srv_' + Date.now(),
-        name: document.getElementById('srv-name').value,
-        price: parseFloat(document.getElementById('srv-price').value),
-        duration: parseInt(document.getElementById('srv-duration').value),
-        color: '#2563eb'
-      };
-      const services = AppStore.getServices();
-      services.push(newSrv);
-      AppStore.saveServices(services);
-      closeModal('modal-service');
-      renderServices();
-      showToast('Serviço adicionado!');
-    });
-
-    // Initial Boot
-    loadSettings();
-    updateDateLabel();
-    renderAgenda();
-  </script>
+  <script src="ui.js"></script>
 </body>
 </html>

@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-  <title>Agendamento Online</title>
-  <meta name="description" content="Faça seu agendamento online de forma rápida e prática.">
+  <title>Agendamento de Procedimento Estético | Enfermagem Clínica</title>
+  <meta name="description" content="Agende seu procedimento de enfermagem estética e harmonização com segurança e excelência clínica.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
@@ -17,8 +17,8 @@
     <!-- Top Banner do Estabelecimento -->
     <div class="booking-banner">
       <div class="booking-profile-img" id="client-view-initials">SB</div>
-      <h1 style="font-size: 1.35rem; font-weight: 800; margin-bottom: 2px;" id="client-view-business">Studio Bella & Estilo</h1>
-      <p style="font-size: 0.85rem; opacity: 0.9;" id="client-view-category">Agende seu horário em poucos cliques</p>
+      <h1 style="font-size: 1.2rem; font-weight: 800; margin-bottom: 2px; letter-spacing: -0.03em;" id="client-view-business">Enf.ª Juliana Mendes • Estética Clínica</h1>
+      <p style="font-size: 0.82rem; opacity: 0.88; letter-spacing: -0.01em;" id="client-view-category">Agende sua avaliação ou procedimento com segurança e excelência clínica</p>
     </div>
 
     <div class="app-content" style="padding-top: 0;">
@@ -29,7 +29,7 @@
         <div class="card">
           <div style="font-size: 0.95rem; font-weight: 700; margin-bottom: 0.75rem; display:flex; align-items:center; gap:6px;">
             <span style="background:var(--primary); color:white; width:20px; height:20px; border-radius:50%; display:inline-flex; align-items:center; justify-content:center; font-size:0.75rem;">1</span>
-            Escolha o Serviço
+            Escolha o Procedimento
           </div>
           <div id="booking-services-list" style="display:flex; flex-direction:column; gap:0.5rem;">
             <!-- Populated via JS -->
@@ -40,7 +40,7 @@
         <div class="card">
           <div style="font-size: 0.95rem; font-weight: 700; margin-bottom: 0.75rem; display:flex; align-items:center; gap:6px;">
             <span style="background:var(--primary); color:white; width:20px; height:20px; border-radius:50%; display:inline-flex; align-items:center; justify-content:center; font-size:0.75rem;">2</span>
-            Escolha a Data
+            Selecione a Data Desejada
           </div>
           <input type="date" id="booking-date" class="form-input" required>
         </div>
@@ -49,7 +49,7 @@
         <div class="card" id="card-slots">
           <div style="font-size: 0.95rem; font-weight: 700; margin-bottom: 0.5rem; display:flex; align-items:center; gap:6px;">
             <span style="background:var(--primary); color:white; width:20px; height:20px; border-radius:50%; display:inline-flex; align-items:center; justify-content:center; font-size:0.75rem;">3</span>
-            Horários Disponíveis
+            Horários Clínicos Disponíveis
           </div>
           <div id="booking-slots-container">
             <div style="font-size:0.85rem; color:var(--text-muted);">Selecione uma data para ver os horários.</div>
@@ -63,39 +63,41 @@
             Seus Dados de Contato
           </div>
           <div class="form-group">
-            <label class="form-label">Seu Nome Completo</label>
+            <label class="form-label">Nome Completo</label>
             <input type="text" id="booking-name" class="form-input" placeholder="Ex: Fernanda Silva" required>
           </div>
           <div class="form-group">
-            <label class="form-label">Seu WhatsApp</label>
+            <label class="form-label">WhatsApp com DDD</label>
             <input type="tel" id="booking-phone" class="form-input" placeholder="Ex: 11999998888" required>
           </div>
           <div class="form-group">
-            <label class="form-label">Observações (opcional)</label>
-            <input type="text" id="booking-notes" class="form-input" placeholder="Ex: Preferência por atendimento pontual">
+            <label class="form-label">Queixa Principal ou Observações (opcional)</label>
+            <input type="text" id="booking-notes" class="form-input" placeholder="Ex: Primeira avaliação para linhas de expressão na testa">
           </div>
 
           <button type="submit" class="btn btn-primary btn-block" id="btn-submit-booking" style="padding: 0.85rem; font-size: 1rem; margin-top: 0.5rem;" disabled>
-            Confirmar Agendamento ✨
+            Solicitar Agendamento Clínico ✨
           </button>
         </div>
-
       </form>
 
       <!-- Sucesso Modal / Card -->
       <div id="booking-success-view" style="display:none; text-align:center; padding: 2rem 1rem;">
         <div style="width:64px; height:64px; background:var(--success-bg); color:var(--success); border-radius:50%; display:inline-flex; align-items:center; justify-content:center; font-size:2rem; margin-bottom:1rem;">✓</div>
-        <h2 style="font-size:1.4rem; font-weight:800; margin-bottom:0.5rem;">Agendamento Confirmado!</h2>
-        <p style="color:var(--text-muted); font-size:0.9rem; margin-bottom:1.5rem;" id="success-summary-text">
-          Seu horário foi reservado com sucesso.
+        <h2 style="font-size:1.3rem; font-weight:800; margin-bottom:0.5rem; letter-spacing:-0.03em;">Pré-Agendamento Solicitado!</h2>
+        <p style="color:var(--text-muted); font-size:0.85rem; margin-bottom:0.75rem;" id="success-summary-text">
+          Seu procedimento foi registrado com sucesso.
+        </p>
+        <p style="color:var(--text-muted); font-size:0.78rem; margin-bottom:1.25rem; font-style:italic; border-left:3px solid var(--accent); padding-left:0.75rem; text-align:left;">
+          ℹ️ Orientações prévias: Evite anticoagulantes, anti-inflamatórios e álcool 24h–48h antes de procedimentos injetáveis. Venha com a pele higienizada, sem maquiagem.
         </p>
         
         <div style="display:flex; flex-direction:column; gap:0.75rem;">
           <a id="btn-whatsapp-confirmation" href="#" target="_blank" class="btn btn-success btn-block" style="padding:0.85rem; font-size:0.95rem;">
-            📱 Enviar Confirmação via WhatsApp
+            📱 Confirmar Agendamento no WhatsApp da Clínica
           </a>
           <button class="btn btn-secondary btn-block" onclick="location.reload()">
-            Novo Agendamento
+            Marcar Outro Procedimento
           </button>
         </div>
       </div>
@@ -132,7 +134,7 @@
           <div style="display:flex; align-items:center; gap:0.75rem;">
             <input type="radio" name="selected_service" value="${s.id}" ${idx === 0 ? 'checked' : ''} style="width:18px; height:18px; accent-color:var(--primary);">
             <div>
-              <strong style="font-size:0.95rem; display:block;">${s.name}</strong>
+              <strong style="font-size:0.95rem; display:block;">${escapeHtml(s.name)}</strong>
               <span style="font-size:0.8rem; color:var(--text-muted);">⏱ ${s.duration} minutos</span>
             </div>
           </div>
@@ -161,7 +163,7 @@
       if (slots.length === 0) {
         container.innerHTML = `
           <div style="font-size:0.85rem; color:var(--danger); padding:0.5rem 0;">
-            Nenhum horário disponível para esta data. Por favor, escolha outro dia.
+            Nenhum horário clínico disponível para esta data. Por favor, selecione outra data.
           </div>
         `;
         selectedSlot = null;
@@ -254,11 +256,11 @@
       successView.style.display = 'block';
 
       document.getElementById('success-summary-text').innerHTML = `
-        Olá <strong>${clientName}</strong>, seu horário para <strong>${selectedService.name}</strong> no dia <strong>${TimeUtils.formatDateBR(dateInput.value)}</strong> às <strong>${selectedSlot}</strong> foi solicitado com sucesso!
+        Olá <strong>${escapeHtml(clientName)}</strong>, seu horário para <strong>${escapeHtml(selectedService.name)}</strong> no dia <strong>${TimeUtils.formatDateBR(dateInput.value)}</strong> às <strong>${escapeHtml(selectedSlot)}</strong> foi solicitado com sucesso!
       `;
 
       // Mensagem direta para o WhatsApp do profissional ou cliente
-      const msg = `Olá! Acabei de agendar um horário pelo link:\n👤 *Nome:* ${clientName}\n🗓 *Data:* ${TimeUtils.formatDateBR(dateInput.value)}\n⏰ *Horário:* ${selectedSlot}\n✂️ *Serviço:* ${selectedService.name}`;
+      const msg = `Olá! Acabei de solicitar meu agendamento pelo link:\n\n👤 *Paciente:* ${clientName}\n🗓 *Data:* ${TimeUtils.formatDateBR(dateInput.value)}\n⏰ *Horário:* ${selectedSlot}\n💉 *Procedimento:* ${selectedService.name}${notes ? `\n📝 *Observação:* ${notes}` : ''}\n\nGostaria de confirmar meu horário!`;
       const waLink = WhatsAppService.createWhatsAppLink(settings.phone, msg);
       document.getElementById('btn-whatsapp-confirmation').href = waLink;
     });

@@ -11,35 +11,42 @@ const STORAGE_KEYS = {
 
 // Dados Padrão Iniciais (Mock inicial inteligente)
 const DEFAULT_SETTINGS = {
-  businessName: 'Studio Bella & Estilo',
-  ownerName: 'Camila Santos',
-  phone: '11999998888',
-  category: 'Estética e Beleza',
-  workStart: '08:00',
+  businessName: 'Enf.ª Juliana Mendes • Estética Clínica',
+  ownerName: 'Enf.ª Juliana Mendes (COREN-SP 123.456)',
+  phone: '11987654321',
+  category: 'Enfermagem Estética & Harmonização Facial',
+  workStart: '08:30',
   workEnd: '19:00',
-  lunchStart: '12:00',
-  lunchEnd: '13:00',
-  slotInterval: 30, // minutos
-  workDays: [1, 2, 3, 4, 5, 6] // Seg a Sáb (0=Dom)
+  lunchStart: '12:30',
+  lunchEnd: '13:30',
+  slotInterval: 30,
+  workDays: [1, 2, 3, 4, 5, 6]
 };
 
 const DEFAULT_SERVICES = [
-  { id: 'srv_1', name: 'Corte Feminino + Escova', price: 90.00, duration: 60, color: '#2563eb' },
-  { id: 'srv_2', name: 'Manicure & Pedicure', price: 65.00, duration: 60, color: '#ec4899' },
-  { id: 'srv_3', name: 'Design de Sobrancelhas', price: 45.00, duration: 30, color: '#8b5cf6' },
-  { id: 'srv_4', name: 'Limpeza de Pele Profunda', price: 130.00, duration: 90, color: '#10b981' }
+  { id: 'srv_1', name: 'Toxina Botulínica (Testa, Glabela e Olhos)', price: 1150.00, duration: 45, color: '#7C3B14' },
+  { id: 'srv_2', name: 'Preenchimento Labial c/ Ácido Hialurônico (1ml)', price: 1250.00, duration: 60, color: '#A83222' },
+  { id: 'srv_3', name: 'Bioestimulador de Colágeno Facial', price: 1900.00, duration: 60, color: '#B38234' },
+  { id: 'srv_4', name: 'Biorevitalização / Skinbooster Hidratação Profunda', price: 650.00, duration: 45, color: '#6B6047' },
+  { id: 'srv_5', name: 'Peeling Químico Renovador & Clareador', price: 260.00, duration: 45, color: '#D97706' },
+  { id: 'srv_6', name: 'Limpeza de Pele Profunda c/ Fototerapia LED', price: 190.00, duration: 75, color: '#B8621B' },
+  { id: 'srv_7', name: 'Drenagem Linfática Facial / Pós-Procedimento', price: 150.00, duration: 45, color: '#976B23' }
 ];
 
 const DEFAULT_CLIENTS = [
-  { id: 'cli_1', name: 'Mariana Lima', phone: '11988881111', notes: 'Prefere atendimentos à tarde' },
-  { id: 'cli_2', name: 'Juliana Costa', phone: '11977772222', notes: 'Alérgica a determinados esmaltes' },
-  { id: 'cli_3', name: 'Patrícia Souza', phone: '11966663333', notes: '' }
+  { id: 'cli_1', name: 'Mariana Silveira', phone: '11988881111', notes: 'Retorno de Toxina Botulínica (15 dias). Sensibilidade leve à lidocaína tópica. Fototipo II.' },
+  { id: 'cli_2', name: 'Camila Rodrigues', phone: '11977772222', notes: 'Protocolo Bioestimulador (Sessão 2/3). Tendência a melasma malar. Uso diário de FPS 70.' },
+  { id: 'cli_3', name: 'Beatriz Antunes', phone: '11966663333', notes: 'Avaliação inicial para Preenchimento Labial e Skinbooster. Sem alergias conhecidas.' },
+  { id: 'cli_4', name: 'Juliana Castro', phone: '11955554444', notes: 'Protocolo acne/oleosidade com Peeling e Limpeza de Pele. Não gestante/lactante.' }
 ];
 
 // Obter data de hoje no formato YYYY-MM-DD
 function getTodayDateString() {
   const d = new Date();
-  return d.toISOString().split('T')[0];
+  const y = d.getFullYear();
+  const m = String(d.getMonth() + 1).padStart(2, '0');
+  const day = String(d.getDate()).padStart(2, '0');
+  return `${y}-${m}-${day}`;
 }
 
 // Inicializador do Repositório Local
@@ -78,29 +85,29 @@ class AppStore {
           id: 'app_1',
           date: today,
           time: '09:00',
-          duration: 60,
+          duration: 45,
           clientId: 'cli_1',
-          clientName: 'Mariana Lima',
+          clientName: 'Mariana Silveira',
           clientPhone: '11988881111',
           serviceId: 'srv_1',
-          serviceName: 'Corte Feminino + Escova',
-          price: 90.00,
+          serviceName: 'Toxina Botulínica (Testa, Glabela e Olhos)',
+          price: 1150.00,
           status: 'confirmado',
-          notes: ''
+          notes: 'Retoque glabelar programado'
         },
         {
           id: 'app_2',
           date: today,
-          time: '14:00',
-          duration: 30,
+          time: '14:30',
+          duration: 60,
           clientId: 'cli_3',
-          clientName: 'Patrícia Souza',
+          clientName: 'Beatriz Antunes',
           clientPhone: '11966663333',
-          serviceId: 'srv_3',
-          serviceName: 'Design de Sobrancelhas',
-          price: 45.00,
+          serviceId: 'srv_2',
+          serviceName: 'Preenchimento Labial c/ Ácido Hialurônico (1ml)',
+          price: 1250.00,
           status: 'agendado',
-          notes: ''
+          notes: 'Aplicar anestésico tópico 20 min antes'
         }
       ];
       localStorage.setItem(STORAGE_KEYS.APPOINTMENTS, JSON.stringify(mockAppointments));
@@ -127,10 +134,13 @@ class AppStore {
   static importFullBackup(jsonString) {
     try {
       const data = JSON.parse(jsonString);
-      if (data.settings) this.saveSettings(data.settings);
-      if (data.services) this.saveServices(data.services);
-      if (data.clients) this.saveClients(data.clients);
-      if (data.appointments) this.saveAppointments(data.appointments);
+      const isArr = Array.isArray;
+      const isObj = v => v && typeof v === 'object' && !isArr(v);
+      if (!isObj(data)) throw new Error('Root inválido');
+      if (data.settings && isObj(data.settings)) this.saveSettings(data.settings);
+      if (data.services && isArr(data.services)) this.saveServices(data.services);
+      if (data.clients && isArr(data.clients)) this.saveClients(data.clients);
+      if (data.appointments && isArr(data.appointments)) this.saveAppointments(data.appointments);
       return true;
     } catch (e) {
       console.error('Falha ao importar backup:', e);
@@ -207,16 +217,33 @@ const WhatsAppService = {
   
   getConfirmationMsg(app) {
     const settings = AppStore.getSettings();
-    return `Olá *${app.clientName}*, tudo bem?\n\nPassando para confirmar seu agendamento no *${settings.businessName}*:\n🗓 *Data:* ${TimeUtils.formatDateBR(app.date)}\n⏰ *Horário:* ${app.time}\n✂️ *Serviço:* ${app.serviceName}\n💰 *Valor:* ${TimeUtils.formatCurrency(app.price)}\n\nPor favor, responda *SIM* para confirmar. Te esperamos! 😊`;
+    const clients = AppStore.getClients();
+    const client = clients.find(c => c.id === app.clientId);
+    const clientName = (client ? client.name : app.clientName) || app.clientName;
+    return `Olá *${clientName}*, tudo bem? ✨\n\nPassando para confirmar seu atendimento na *${settings.businessName}*:\n\n🗓 *Data:* ${TimeUtils.formatDateBR(app.date)}\n⏰ *Horário:* ${app.time}\n💉 *Procedimento:* ${app.serviceName}\n💰 *Investimento:* ${TimeUtils.formatCurrency(app.price)}\n\n📋 *Recomendações Prévias:*\n• Chegue com 10 min de antecedência para preparo e assepsia.\n• Evite maquiagem na região do procedimento no dia.\n\nPor favor, responda *SIM* para confirmar. Estamos ansiosos para te receber! 🌸`;
   },
 
   getReminderMsg(app) {
     const settings = AppStore.getSettings();
-    return `Oi *${app.clientName}*, lembrete do seu horário amanhã no *${settings.businessName}* às *${app.time}* (${app.serviceName}).\n\nCaso precise remarcar, nos avise com antecedência. Até logo! ✨`;
+    const clients = AppStore.getClients();
+    const client = clients.find(c => c.id === app.clientId);
+    const clientName = (client ? client.name : app.clientName) || app.clientName;
+    return `Oi *${clientName}*, lembrete do seu procedimento amanhã na *${settings.businessName}*:\n\n⏰ *Horário:* ${app.time}\n💉 *Procedimento:* ${app.serviceName}\n\nLembre-se de manter a pele bem hidratada e com protetor solar. Caso precise remarcar, avise com antecedência. Até logo! ✨`;
   }
 };
 
+// Sanitização XSS
+function escapeHtml(str) {
+  return String(str || '')
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&#039;');
+}
+
 // Exposição Global
+window.escapeHtml = escapeHtml;
 window.AppStore = AppStore;
 window.TimeUtils = TimeUtils;
 window.WhatsAppService = WhatsAppService;
