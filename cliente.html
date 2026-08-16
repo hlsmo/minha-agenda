@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Agendamento Online</title>
+  <meta name="description" content="Faça seu agendamento online de forma rápida e prática.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <div id="app-container">
+    
+    <!-- Top Banner do Estabelecimento -->
+    <div class="booking-banner">
+      <div class="booking-profile-img" id="client-view-initials">SB</div>
+      <h1 style="font-size: 1.35rem; font-weight: 800; margin-bottom: 2px;" id="client-view-business">Studio Bella & Estilo</h1>
+      <p style="font-size: 0.85rem; opacity: 0.9;" id="client-view-category">Agende seu horário em poucos cliques</p>
+    </div>
+
+    <div class="app-content" style="padding-top: 0;">
+
+      <form id="form-client-booking">
+        
+        <!-- Passo 1: Seleção de Serviço -->
+        <div class="card">
+          <div style="font-size: 0.95rem; font-weight: 700; margin-bottom: 0.75rem; display:flex; align-items:center; gap:6px;">
+            <span style="background:var(--primary); color:white; width:20px; height:20px; border-radius:50%; display:inline-flex; align-items:center; justify-content:center; font-size:0.75rem;">1</span>
+            Escolha o Serviço
+          </div>
+          <div id="booking-services-list" style="display:flex; flex-direction:column; gap:0.5rem;">
+            <!-- Populated via JS -->
+          </div>
+        </div>
+
+        <!-- Passo 2: Seleção de Data -->
+        <div class="card">
+          <div style="font-size: 0.95rem; font-weight: 700; margin-bottom: 0.75rem; display:flex; align-items:center; gap:6px;">
+            <span style="background:var(--primary); color:white; width:20px; height:20px; border-radius:50%; display:inline-flex; align-items:center; justify-content:center; font-size:0.75rem;">2</span>
+            Escolha a Data
+          </div>
+          <input type="date" id="booking-date" class="form-input" required>
+        </div>
+
+        <!-- Passo 3: Horários Livres -->
+        <div class="card" id="card-slots">
+          <div style="font-size: 0.95rem; font-weight: 700; margin-bottom: 0.5rem; display:flex; align-items:center; gap:6px;">
+            <span style="background:var(--primary); color:white; width:20px; height:20px; border-radius:50%; display:inline-flex; align-items:center; justify-content:center; font-size:0.75rem;">3</span>
+            Horários Disponíveis
+          </div>
+          <div id="booking-slots-container">
+            <div style="font-size:0.85rem; color:var(--text-muted);">Selecione uma data para ver os horários.</div>
+          </div>
+        </div>
+
+        <!-- Passo 4: Seus Dados -->
+        <div class="card">
+          <div style="font-size: 0.95rem; font-weight: 700; margin-bottom: 0.75rem; display:flex; align-items:center; gap:6px;">
+            <span style="background:var(--primary); color:white; width:20px; height:20px; border-radius:50%; display:inline-flex; align-items:center; justify-content:center; font-size:0.75rem;">4</span>
+            Seus Dados de Contato
+          </div>
+          <div class="form-group">
+            <label class="form-label">Seu Nome Completo</label>
+            <input type="text" id="booking-name" class="form-input" placeholder="Ex: Fernanda Silva" required>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Seu WhatsApp</label>
+            <input type="tel" id="booking-phone" class="form-input" placeholder="Ex: 11999998888" required>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Observações (opcional)</label>
+            <input type="text" id="booking-notes" class="form-input" placeholder="Ex: Preferência por atendimento pontual">
+          </div>
+
+          <button type="submit" class="btn btn-primary btn-block" id="btn-submit-booking" style="padding: 0.85rem; font-size: 1rem; margin-top: 0.5rem;" disabled>
+            Confirmar Agendamento ✨
+          </button>
+        </div>
+
+      </form>
+
+      <!-- Sucesso Modal / Card -->
+      <div id="booking-success-view" style="display:none; text-align:center; padding: 2rem 1rem;">
+        <div style="width:64px; height:64px; background:var(--success-bg); color:var(--success); border-radius:50%; display:inline-flex; align-items:center; justify-content:center; font-size:2rem; margin-bottom:1rem;">✓</div>
+        <h2 style="font-size:1.4rem; font-weight:800; margin-bottom:0.5rem;">Agendamento Confirmado!</h2>
+        <p style="color:var(--text-muted); font-size:0.9rem; margin-bottom:1.5rem;" id="success-summary-text">
+          Seu horário foi reservado com sucesso.
+        </p>
+        
+        <div style="display:flex; flex-direction:column; gap:0.75rem;">
+          <a id="btn-whatsapp-confirmation" href="#" target="_blank" class="btn btn-success btn-block" style="padding:0.85rem; font-size:0.95rem;">
+            📱 Enviar Confirmação via WhatsApp
+          </a>
+          <button class="btn btn-secondary btn-block" onclick="location.reload()">
+            Novo Agendamento
+          </button>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+
+  <script src="app.js"></script>
+  <script>
+    let selectedService = null;
+    let selectedSlot = null;
+
+    // Carrega dados da loja/profissional
+    const settings = AppStore.getSettings();
+    document.getElementById('client-view-business').textContent = settings.businessName;
+    document.getElementById('client-view-category').textContent = settings.category || 'Agendamento Online';
+    const initials = (settings.businessName || 'MA').split(' ').map(w => w[0]).slice(0, 2).join('').toUpperCase();
+    document.getElementById('client-view-initials').textContent = initials;
+
+    // Configura data mínima como hoje
+    const today = getTodayDateString();
+    const dateInput = document.getElementById('booking-date');
+    dateInput.min = today;
+    dateInput.value = today;
+
+    // Renderiza serviços disponíveis
+    function renderBookingServices() {
+      const services = AppStore.getServices();
+      const container = document.getElementById('booking-services-list');
+      
+      container.innerHTML = services.map((s, idx) => `
+        <label class="card" style="margin-bottom:0; cursor:pointer; display:flex; align-items:center; justify-content:space-between; padding:0.85rem; border:2px solid var(--border-color); border-radius:var(--radius-md);">
+          <div style="display:flex; align-items:center; gap:0.75rem;">
+            <input type="radio" name="selected_service" value="${s.id}" ${idx === 0 ? 'checked' : ''} style="width:18px; height:18px; accent-color:var(--primary);">
+            <div>
+              <strong style="font-size:0.95rem; display:block;">${s.name}</strong>
+              <span style="font-size:0.8rem; color:var(--text-muted);">⏱ ${s.duration} minutos</span>
+            </div>
+          </div>
+          <strong style="color:var(--primary); font-size:1rem;">${TimeUtils.formatCurrency(s.price)}</strong>
+        </label>
+      `).join('');
+
+      selectedService = services[0] || null;
+
+      // Evento de seleção
+      document.querySelectorAll('input[name="selected_service"]').forEach(radio => {
+        radio.addEventListener('change', (e) => {
+          selectedService = services.find(s => s.id === e.target.value);
+          loadAvailableSlots();
+        });
+      });
+    }
+
+    // Carrega slots livres para a data e serviço selecionados
+    function loadAvailableSlots() {
+      if (!selectedService || !dateInput.value) return;
+
+      const slots = TimeUtils.getAvailableSlots(dateInput.value, selectedService.duration);
+      const container = document.getElementById('booking-slots-container');
+
+      if (slots.length === 0) {
+        container.innerHTML = `
+          <div style="font-size:0.85rem; color:var(--danger); padding:0.5rem 0;">
+            Nenhum horário disponível para esta data. Por favor, escolha outro dia.
+          </div>
+        `;
+        selectedSlot = null;
+        updateSubmitBtn();
+        return;
+      }
+
+      container.innerHTML = `
+        <div class="slot-grid">
+          ${slots.map(slot => `
+            <button type="button" class="slot-btn ${selectedSlot === slot ? 'selected' : ''}" data-slot="${slot}">
+              ${slot}
+            </button>
+          `).join('')}
+        </div>
+      `;
+
+      // Seleção de slot
+      container.querySelectorAll('.slot-btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+          container.querySelectorAll('.slot-btn').forEach(b => b.classList.remove('selected'));
+          btn.classList.add('selected');
+          selectedSlot = btn.getAttribute('data-slot');
+          updateSubmitBtn();
+        });
+      });
+
+      updateSubmitBtn();
+    }
+
+    dateInput.addEventListener('change', () => {
+      selectedSlot = null;
+      loadAvailableSlots();
+    });
+
+    function updateSubmitBtn() {
+      const btn = document.getElementById('btn-submit-booking');
+      btn.disabled = !selectedSlot;
+    }
+
+    // Submissão do agendamento
+    document.getElementById('form-client-booking').addEventListener('submit', (e) => {
+      e.preventDefault();
+      if (!selectedSlot || !selectedService) {
+        alert('Por favor, selecione um horário disponível.');
+        return;
+      }
+
+      const clientName = document.getElementById('booking-name').value.trim();
+      const clientPhone = document.getElementById('booking-phone').value.trim();
+      const notes = document.getElementById('booking-notes').value.trim();
+
+      // Salva/Atualiza cliente na base local
+      const clients = AppStore.getClients();
+      let client = clients.find(c => c.phone.replace(/\D/g,'') === clientPhone.replace(/\D/g,''));
+      if (!client) {
+        client = {
+          id: 'cli_' + Date.now(),
+          name: clientName,
+          phone: clientPhone,
+          notes: ''
+        };
+        clients.push(client);
+        AppStore.saveClients(clients);
+      }
+
+      // Cria agendamento
+      const newApp = {
+        id: 'app_' + Date.now(),
+        date: dateInput.value,
+        time: selectedSlot,
+        duration: selectedService.duration,
+        clientId: client.id,
+        clientName: clientName,
+        clientPhone: clientPhone,
+        serviceId: selectedService.id,
+        serviceName: selectedService.name,
+        price: selectedService.price,
+        status: 'agendado',
+        notes: notes
+      };
+
+      const apps = AppStore.getAppointments();
+      apps.push(newApp);
+      AppStore.saveAppointments(apps);
+
+      // Exibe tela de sucesso
+      document.getElementById('form-client-booking').style.display = 'none';
+      const successView = document.getElementById('booking-success-view');
+      successView.style.display = 'block';
+
+      document.getElementById('success-summary-text').innerHTML = `
+        Olá <strong>${clientName}</strong>, seu horário para <strong>${selectedService.name}</strong> no dia <strong>${TimeUtils.formatDateBR(dateInput.value)}</strong> às <strong>${selectedSlot}</strong> foi solicitado com sucesso!
+      `;
+
+      // Mensagem direta para o WhatsApp do profissional ou cliente
+      const msg = `Olá! Acabei de agendar um horário pelo link:\n👤 *Nome:* ${clientName}\n🗓 *Data:* ${TimeUtils.formatDateBR(dateInput.value)}\n⏰ *Horário:* ${selectedSlot}\n✂️ *Serviço:* ${selectedService.name}`;
+      const waLink = WhatsAppService.createWhatsAppLink(settings.phone, msg);
+      document.getElementById('btn-whatsapp-confirmation').href = waLink;
+    });
+
+    // Boot
+    renderBookingServices();
+    loadAvailableSlots();
+  </script>
+</body>
+</html>
